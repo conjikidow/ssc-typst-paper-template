@@ -1,0 +1,46 @@
+name: Generate Typst PDF Diff
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '**/*.typ'
+      - '**/*.bib'
+      - '**/*.csl'
+      - '**/*.svg'
+      - '**/*.png'
+      - '**/*.jpg'
+      - '**/*.jpeg'
+      - '**/*.webp'
+      - '**/*.gif'
+      - .github/workflows/generate-typst-pdf-diff.yaml
+  workflow_dispatch:
+    inputs:
+      base_ref:
+        description: 'Base revision to compare (for example: main or a commit SHA)'
+        required: true
+        default: main
+      head_ref:
+        description: 'Head revision to compare (for example: a branch name or commit SHA)'
+        required: true
+        default: main
+
+env:
+  TYPST_TARGET_FILES: main.typ # Space-separated list of Typst entrypoint files
+
+jobs:
+  generate-typst-pdf-diff:
+    name: Generate Typst PDF Diff
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Generate Typst PDF Diff
+        uses: conjikidow/typst-pdf-diff-action@8e68a5cec6004d3c4371e72da164e99760b50ffb # v0.2.0
+        with:
+          target-files: ${{ env.TYPST_TARGET_FILES }}
+          typst-version: '^0.14.2'
+          base-ref: ${{ github.event_name == 'workflow_dispatch' && inputs.base_ref || '' }}
+          head-ref: ${{ github.event_name == 'workflow_dispatch' && inputs.head_ref || '' }}

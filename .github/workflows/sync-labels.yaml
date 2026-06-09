@@ -1,0 +1,38 @@
+name: Sync Labels
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/sync-labels.yaml'
+      - '.github/labels/label-definition.yaml'
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    paths:
+      - '.github/workflows/sync-labels.yaml'
+      - '.github/labels/label-definition.yaml'
+
+jobs:
+
+  sync-labels:
+    name: Sync Labels
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout the main repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Run Labeler
+        uses: crazy-max/ghaction-github-labeler@548a7c3603594ec17c819e1239f281a3b801ab4d # v6.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          yaml-file: .github/labels/label-definition.yaml
+          skip-delete: false
+          dry-run: false
