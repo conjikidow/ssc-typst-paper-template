@@ -1,5 +1,8 @@
 [default.extend-words]
 typ = "typ"
+# Ordinal suffixes used by the `ordinal` helper in lib.typ.
+nd = "nd"
+rd = "rd"
 
 [files]
 extend-exclude = [
