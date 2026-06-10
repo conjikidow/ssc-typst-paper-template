@@ -99,12 +99,7 @@
     ],
   )
   set text(font: "New Computer Modern", lang: "en", size: 10pt)
-  set par(
-    justify: true,
-    leading: 0.52em,
-    spacing: 0.52em,
-    first-line-indent: (amount: 1.5em, all: true),
-  )
+  set par(justify: true, leading: 0.52em, spacing: 14.5pt)
 
   // --- Front matter (full width, single column) ---
 
@@ -120,7 +115,6 @@
 
   // Authors and affiliations: centered, grouped by shared affiliation.
   align(center)[
-    #set par(first-line-indent: 0pt)
     #{
       let blocks = authors.map(author => {
         let phone = author.at("phone", default: none)
@@ -144,7 +138,7 @@
   v(6mm, weak: true)
 
   // --- Headings ---
-  // Level 1: bold, all capitals. Level 2/3: bold italic. Unnumbered.
+  // Level 1: bold, all capitals. Level 2: bold italic. Unnumbered.
   let after-heading = state("ssc-after-heading", false)
   show par: it => {
     after-heading.update(false)
@@ -167,23 +161,22 @@
     )
     after-heading.update(true)
   }
-  show heading.where(level: 3): it => {
-    context block(
-      above: if after-heading.get() { 1.2em } else { 2.0em },
-      below: 1.2em,
-      text(weight: "bold", style: "italic", it),
-    )
-    after-heading.update(true)
-  }
 
   // --- Figures and tables ---
   // Captions are bold; figure captions sit below, table captions above.
+  show figure: set block(above: 14.5pt, below: 14.5pt)
+  set figure(gap: 13pt)
   show figure.caption: set text(weight: "bold")
-  show figure.where(kind: image): set figure(supplement: [Figure])
   show figure.where(kind: table): set figure.caption(position: top)
+  show figure.where(kind: image): set figure(supplement: [Figure])
+  show figure.where(kind: table): set figure(supplement: [Table])
+
+  // --- Equations ---
+  // Left-flushed; the number sits against the right margin.
+  set math.equation(numbering: "(1)")
+  show math.equation.where(block: true): set align(left)
 
   // --- Body (two columns) ---
-  set math.equation(numbering: "(1)")
   show: columns.with(2, gutter: 18pt)
   body
 }
