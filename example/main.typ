@@ -1,6 +1,6 @@
 // This example is licensed under the MIT-0 License.
 // You can freely use and modify it without any restrictions.
-// #import "@preview/smallsat:0.1.0": project
+// #import "@preview/halo-smallsat:0.1.0": project
 #import "../lib.typ": project
 
 #show: project.with(
