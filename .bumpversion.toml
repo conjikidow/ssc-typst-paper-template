@@ -2,3 +2,23 @@
 current_version = "0.1.0"
 commit = false
 tag = false
+
+[[tool.bumpversion.files]]
+filename = "typst.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "template/main.typ"
+search = "halo-smallsat:{current_version}"
+replace = "halo-smallsat:{new_version}"
+
+[[tool.bumpversion.files]]
+filename = "example/main.typ"
+search = "halo-smallsat:{current_version}"
+replace = "halo-smallsat:{new_version}"
+
+[[tool.bumpversion.files]]
+filename = "README.md"
+search = "halo-smallsat:{current_version}"
+replace = "halo-smallsat:{new_version}"
