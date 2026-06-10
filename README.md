@@ -1,105 +1,54 @@
-# typst-repository-template
+# Typst Template for the Small Satellite Conference Manuscript
 
-[![Typst Version](https://img.shields.io/badge/typst-0.12%20%7C%200.13%20%7C%200.14-blue)](https://typst.app/)
+[![Typst Version](https://img.shields.io/badge/typst-0.13%20%7C%200.14-blue)](https://typst.app/)
 [![styled with typstyle](https://img.shields.io/badge/styled_with-typstyle-024a51.svg?style=flat)](https://github.com/typstyle-rs/typstyle)
 [![prek](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json)](https://github.com/j178/prek)
 
-This is a template repository for Typst projects.
+This is an unofficial Typst template for the [Annual Small Satellite Conference](https://smallsat.org/) (SSC) manuscript.
+It was created with reference to the official LaTeX and Word templates.
 
-## GitHub Actions Permissions Setup
+## Usage
 
-To enable GitHub Actions to run properly in your repository, you need to adjust the default permissions granted
-to the `GITHUB_TOKEN`.
-This is especially important for **private repositories**.
+To initialize a project with this template, run the following command:
 
-Follow these steps to configure the permissions:
-
-1. Go to the **Settings** tab of your repository.
-2. On the left-hand menu, select **Actions/General**.
-3. Under the **Workflow permissions** section, ensure the following options are selected:
-   - **`Read and write permissions`**: This grants read and write access to the repository for all scopes.
-   - **`Allow GitHub Actions to create and approve pull requests`**: This allows GitHub Actions to create pull requests.
-4. Save the changes.
-
-![GitHub Actions permissions setup screenshot](https://github.com/user-attachments/assets/da55e896-e087-486e-aadc-7fc1283dc652)
-
-These settings are **necessary only for private repositories**. For public repositories, this configuration is not required.
-
-## CI Setup
-
-The CI workflow compiles the main Typst source files.
-You can specify their paths as a space-separated list in [`ci.yaml`](.github/workflows/ci.yaml#L11):
-
-```yaml
-env:
-  TYPST_MAIN_FILES: 'main.typ another.typ'
+```bash
+typst init @preview/halo-smallsat
 ```
 
-## Pre-commit Hooks Setup
+Or, you can manually add the following line at the beginning of your Typst file:
 
-This template recommends using [`prek`](https://prek.j178.dev) (a faster, drop-in alternative to [`pre-commit`](https://pre-commit.com)).
-
-Install the hooks by running:
-
-```console
-uvx prek install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
+```typst
+#import "@preview/halo-smallsat:0.1.0": project
 ```
 
-If `prek` is already installed:
+The `project` function exported by this template has the following named arguments:
 
-```console
-prek install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
-```
+| Argument | Required | Default | Description |
+| --- | --- | --- | --- |
+| `paper` | optional | `"us-letter"` | The paper size, either `"us-letter"` or `"a4"`. |
+| `conference-number` | required | — | The conference number (e.g. `40` for the 40th conference, in 2026). |
+| `paper-number` | required | — | The paper number (e.g. `"SSC26-X-X"`). |
+| `title` | required | — | The title of the manuscript. |
+| `authors` | required | — | The manuscript's authors: an array of affiliation-group dictionaries (see below). |
+| `first-author-last-name` | required | — | The last name of the first author. |
+| `abstract` | required | — | The abstract of the manuscript (max 500 words). |
 
-If you prefer `pre-commit`:
+Each entry in `authors` is a dictionary describing one affiliation group, with the following keys:
 
-```console
-uvx pre-commit install --hook-type pre-commit --hook-type commit-msg --hook-type pre-push
-```
+| Key | Required | Description |
+| --- | --- | --- |
+| `name` | required | The author's name, or an array of names for several authors sharing one affiliation. |
+| `affiliation` | required | The affiliation of the author(s). |
+| `address` | required | The address of the affiliation. |
+| `phone` | optional | The phone number (the first author's, for a shared group). |
+| `email` | optional | The email address (the first author's, for a shared group). |
 
-## Commit Message Linting with Commitizen
+The scaffolded project is a minimal starting point (see [`template/main.typ`](template/main.typ)).
+For a complete example that exercises every feature, see [`example/main.typ`](example/main.typ).
 
-This template repository enforces [Conventional Commits](https://www.conventionalcommits.org) in pre-commit hooks and CI,
-so your commit messages must follow that format.
-You can maintain Conventional Commits manually, but automation tools such as Commitizen or git-cz can help.
-Any tool is fine, but this repository uses [commitizen-tools/commitizen](https://github.com/commitizen-tools/commitizen)
-for checks, so it is recommended.
+## License
 
-Install Commitizen:
-
-```console
-uv tool install commitizen
-```
-
-Use Commitizen instead of `git commit`:
-
-```console
-cz commit
-```
-
-For more details, see [Commitizen documentation](https://commitizen-tools.github.io/commitizen).
-
-## Version Bumping by Labels
-
-This repository is configured to automatically bump the version when a pull request is merged with one of the
-following labels:
-
-- `update::major`
-- `update::minor`
-- `update::patch`
-
-Simply add one of these labels to your pull request before merging.
-A new pull request for the version bump will be automatically created.
-
-The version number is managed via the `.bumpversion.toml` file in the repository root.
-If your project defines its version in specific files (e.g., `typst.toml`, etc.),
-you may need to add entries like the following to `.bumpversion.toml`:
-
-```toml
-[[tool.bumpversion.files]]
-filename = "typst.toml"
-search = 'version = "{current_version}"'
-replace = 'version = "{new_version}"'
-```
-
-For more details, see [conjikidow/bump-version-action](https://github.com/conjikidow/bump-version-action).
+- The `lib.typ` file and all other files in this repository, except for the content in the `template` and `example`
+  directories, are licensed under the [MIT License](./LICENSE-MIT).
+- The content in the `template` and `example` directories is licensed under the [MIT-0 License](./LICENSE-MIT-0),
+  which allows for unlimited reuse without any restrictions.
