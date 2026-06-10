@@ -1,0 +1,18 @@
+[package]
+name = "halo-smallsat"
+version = "0.1.0"
+compiler = "0.13.0"
+entrypoint = "lib.typ"
+authors = ["Riki Nakamura <@conjikidow>"]
+license = "MIT AND MIT-0"
+description = "Template for the Small Satellite Conference (SSC) manuscript"
+repository = "https://github.com/conjikidow/ssc-typst-paper-template"
+keywords = ["SSC", "SmallSat", "Small Satellite Conference"]
+categories = ["paper"]
+disciplines = ["engineering"]
+exclude = ["**.pdf"]
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+thumbnail = "thumbnail.png"
