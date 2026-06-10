@@ -11,8 +11,8 @@
   paper-number: "SSC26-XII-07",
   title: "Example Paper for the SSC Typst Template",
   authors: (
-    // Several authors who share an affiliation can be passed as an array of
-    // names; the phone number and email are the first author's.
+    // Several authors who share an affiliation can be passed as an array of names;
+    // the phone number and email are the first author's.
     (
       name: ("Jane A. Doe", "John B. Smith"),
       affiliation: "Department of Aerospace Engineering, Northbridge University",
@@ -28,10 +28,9 @@
   ),
   first-author-last-name: "Doe",
   abstract: [
-    This document is a feature showcase for the Typst Small Satellite Conference
-    template. The text below is placeholder content and carries no technical
-    meaning; it exists only to demonstrate the layout of headings, figures,
-    tables, equations, and citations. #lorem(50)
+    This document is a feature showcase for the Typst Small Satellite Conference template.
+    The text below is placeholder content and carries no technical meaning; it exists only to demonstrate the layout of headings, figures, tables, equations, and citations.
+    #lorem(50)
   ],
 )
 
@@ -50,8 +49,8 @@
 
 = First-Level Heading
 
-Body text is fully justified and indented. Citations appear as superscript
-numbers in order of appearance.@example_article@example_proceedings
+Body text is fully justified and indented.
+Citations appear as superscript numbers in order of appearance. @example_article @example_proceedings
 
 #lorem(40)
 
@@ -63,8 +62,8 @@ numbers in order of appearance.@example_article@example_proceedings
 
 = Figures and Tables
 
-A single-column figure (@fig:single), a table (@tab:example), and a figure that
-spans both columns (@fig:wide) are shown below. #lorem(50)
+A single-column figure (@fig:single), a table (@tab:example), and a figure that spans both columns (@fig:wide) are shown below.
+#lorem(50)
 
 #figure(
   rect(width: 6cm, height: 5cm, stroke: 0.4pt)[
@@ -98,18 +97,17 @@ spans both columns (@fig:wide) are shown below. #lorem(50)
 
 = Equations
 
-Equations are left-flushed and numbered sequentially, with the number in
-parentheses against the right margin:
+Equations are left-flushed and numbered sequentially, with the number in parentheses against the right margin:
 
 $ y = a x + b $
 
-where $a$ and $b$ are placeholder coefficients. #lorem(25)
+where $a$ and $b$ are placeholder coefficients.
+#lorem(25)
 
 = Notes
 
-Notes should be avoided; incorporate the information into the body text
-instead. In tables, reference marks such as \*, \*\*, and $dagger$ may be used
-where a footnote is unavoidable.
+Notes should be avoided; incorporate the information into the body text instead.
+In tables, reference marks such as \*, \*\*, and $dagger$ may be used where a footnote is unavoidable.
 
 = Acknowledgments
 
