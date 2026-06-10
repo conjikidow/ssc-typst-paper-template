@@ -26,7 +26,7 @@ on:
         default: main
 
 env:
-  TYPST_TARGET_FILES: main.typ # Space-separated list of Typst entrypoint files
+  TYPST_TARGET_FILES: example/main.typ # Space-separated list of Typst entrypoint files
 
 jobs:
   generate-typst-pdf-diff:
