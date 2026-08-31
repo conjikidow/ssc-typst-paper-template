@@ -8,7 +8,7 @@ repos:
       - id: typstyle
 
   - repo: https://github.com/crate-ci/typos
-    rev: 37bb98842b0d8c4ffebdb75301a13db0267cef89  # frozen: v1.47.2
+    rev: 4d9c206a77c041268485162b8e2579ad7a5cb9a3  # frozen: v1.50.0
     hooks:
       - id: typos
         args: ["--force-exclude"]
